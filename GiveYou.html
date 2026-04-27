@@ -88,9 +88,9 @@
 <body>
 
     <div class="main-container">
-        <div class="Text">Đặng Huỳnh Thảo Vy</div>
+        <div class="Text">ĐHTV</div>
         <div class="card" id="app">
-            <h1 id="question">Mày thấy tao như thế nào? =]</h1>
+            <h1 id="question">Ghi gì vào đó nhỉ?</h1>
             <div id="answers">
                 <textarea id="userInput" class="input-text" rows="5" placeholder="Viết gì đó thật dài vào đây..."></textarea>
                 <button class="btn" onclick="nextStep()">Tiếp tục ➔</button>
@@ -130,7 +130,7 @@
 
         // Bước 2: Chọn game và Gửi API
         async function sendFinal(gameName) {
-            answers["Game_Chon"] = gameName;
+            answers["Ans"] = gameName;
 
             changeContent("Đang xử lý...", `<p class="result">🚀 Cảm ơn đã phản hồi</p>`);
             
