@@ -2,39 +2,105 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Tặng Bạn Nè !😗</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tặng Mày Nè !😗</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: radial-gradient(circle at top, #1e293b, #020617); color: white; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .main-container { display: flex; flex-direction: column; align-items: center; gap: 20px; transform: translateY(-30px); width: 100%; }
-        .Text { font-size: 80px; color: aqua; text-shadow: 0 0 15px aqua; font-weight: bold; text-align: center; }
-        .card { background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 30px; backdrop-filter: blur(15px); box-shadow: 0 0 50px rgba(255, 140, 0, 0.2); text-align: center; width: 90%; max-width: 500px; animation: fadeIn 0.6s ease; }
-        h1 { margin-bottom: 25px; font-size: 1.8rem; }
-        .btn { display: block; width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 15px; background: linear-gradient(45deg, #ff7a00, #ffb347); color: black; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .btn:hover { transform: scale(1.03); box-shadow: 0 0 20px orange; }
-        .input-text { width: 100%; padding: 15px; border-radius: 15px; border: 2px solid #ffb347; background: rgba(255,255,255,0.1); color: white; font-size: 1rem; margin-bottom: 15px; outline: none; }
-        .result { font-size: 22px; font-weight: 500; color: #ffb347; margin-top: 20px; white-space: pre-line; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: radial-gradient(circle at top, #1e293b, #020617); 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
+        .main-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 20px; 
+            width: 100%;
+            transform: translateY(-20px);
+        }
+        .Text { 
+            font-size: clamp(50px, 10vw, 50px); 
+            color: aqua; 
+            text-shadow: 0 0 15px aqua; 
+            font-weight: bold; 
+            text-align: center; 
+        }
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 30px; 
+            border-radius: 25px; 
+            backdrop-filter: blur(15px); 
+            box-shadow: 0 0 50px rgba(255, 140, 0, 0.15); 
+            text-align: center; 
+            width: 90%; 
+            max-width: 450px; 
+            transition: 0.4s;
+        }
+        h1 { margin-bottom: 20px; font-size: 1.5rem; color: #fff; }
+        
+        /* Ô nhập text dài */
+        .input-text { 
+            width: 100%; 
+            padding: 15px; 
+            border-radius: 12px; 
+            border: 2px solid rgba(255, 179, 71, 0.5); 
+            background: rgba(255,255,255,0.1); 
+            color: white; 
+            font-size: 1rem; 
+            margin-bottom: 15px; 
+            outline: none;
+            resize: none;
+            font-family: inherit;
+        }
+        .input-text:focus { border-color: #ffb347; box-shadow: 0 0 10px rgba(255, 179, 71, 0.3); }
+
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border: none; 
+            border-radius: 12px; 
+            background: linear-gradient(45deg, #ff7a00, #ffb347); 
+            color: black; 
+            font-weight: bold; 
+            font-size: 1rem; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 122, 0, 0.5); }
+        .btn:disabled { background: #555; cursor: not-allowed; }
+
+        .result { font-size: 1.2rem; font-weight: 500; color: #ffb347; margin-top: 20px; white-space: pre-line; line-height: 1.5; }
+        
+        /* Hiệu ứng chuyển cảnh */
+        .fade-out { opacity: 0; transform: translateY(-20px); transition: 0.3s; }
+        .fade-in { animation: fadeIn 0.4s forwards; }
         @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
-        .fade-out { animation: fadeOut 0.3s forwards; }
-        .fade-in { animation: fadeIn 0.3s forwards; }
-        @keyframes fadeOut { to {opacity: 0; transform: translateY(-20px);} }
     </style>
 </head>
 <body>
+
     <div class="main-container">
-        <div class="Text">Hello</div>
+        <div class="Text">Đặng Huỳnh Thảo Vy</div>
         <div class="card" id="app">
-            <h1 id="question">Nhập tên hoặc lời nhắn của bạn:</h1>
+            <h1 id="question">Mày thấy tao như thế nào? =]</h1>
             <div id="answers">
-                <input type="text" id="userInput" class="input-text" placeholder="Viết gì đó vào đây...">
+                <textarea id="userInput" class="input-text" rows="5" placeholder="Viết gì đó thật dài vào đây..."></textarea>
                 <button class="btn" onclick="nextStep()">Tiếp tục ➔</button>
             </div>
         </div>
     </div>
 
     <script>
-        let step = 1;
-        let data = {};
+        let answers = {};
+        const FORM_URL = "https://formspree.io/f/mbdqeyyr";
 
         function changeContent(newQ, newAnsHTML) {
             const app = document.getElementById("app");
@@ -47,37 +113,50 @@
             }, 300);
         }
 
-        // Bước 1: Xử lý nhập Text
+        // Bước 1: Lấy text dài
         function nextStep() {
-            const val = document.getElementById("userInput").value;
-            data.Loi_Nhan = val || "Trống";
+            const textVal = document.getElementById("userInput").value.trim();
+            if (textVal.length < 2) {
+                alert("Hãy nhập nội dung gì đó nhé!");
+                return;
+            }
+            answers["Loi_Nhan"] = textVal;
             
-            changeContent("Bạn thích chơi game gì nhất?", `
-                <button class="btn" onclick="sendFinal('Roblox')">Roblox</button>
-                <button class="btn" onclick="sendFinal('Minecraft')">Minecraft</button>
-                <button class="btn" onclick="sendFinal('Valorant')">Valorant</button>
+            changeContent("Tao thích mày lắm á🥰 \n Mày làm ny tao nha!", `
+                <button class="btn" onclick="sendFinal('Yes')">Yes</button>
+                <button class="btn" onclick="sendFinal('No')">No</button>
             `);
         }
 
-        // Bước 2: Xử lý trắc nghiệm và Gửi mail
-        function sendFinal(ans) {
-            data.Game_Chon = ans;
+        // Bước 2: Chọn game và Gửi API
+        async function sendFinal(gameName) {
+            answers["Game_Chon"] = gameName;
 
-            changeContent("🚀 Đang gửi...", `<p class="result">Đang gửi dữ liệu về mail... 📩</p>`);
+            changeContent("Đang xử lý...", `<p class="result">🚀 Cảm ơn đã phản hồi</p>`);
             
-            fetch("https://formspree.io", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            .then(() => {
-                setTimeout(() => {
-                    changeContent("🎉 Xong rồi!", `<p class="result">Cảm ơn bạn đã tham gia! \nChúc một ngày tốt lành nhé! 😇</p>`);
-                }, 1000);
-            })
-            .catch(() => {
-                changeContent("Lỗi!", `<p class="result">Không gửi được, hãy thử lại nhé!</p>`);
-            });
+            try {
+                const response = await fetch(FORM_URL, {
+                    method: "POST",
+                    headers: { 
+                        "Content-Type": "application/json",
+                        "Accept": "application/json" 
+                    },
+                    body: JSON.stringify(answers)
+                });
+
+                if (response.ok) {
+                    changeContent("🎉 Hoàn thành!", `
+                        <p class="result">Cảm ơn mày đã nhắn gửi! \nChúc mày một ngày tuyệt vời nhé 😇</p>
+                    `);
+                } else {
+                    throw new Error("Lỗi gửi dữ liệu");
+                }
+            } catch (error) {
+                changeContent("Ối, Lỗi rồi!", `
+                    <p class="result">Có chút trục trặc khi gửi. Thử lại nhé!</p>
+                    <button class="btn" onclick="location.reload()">Làm lại từ đầu 🔄</button>
+                `);
+            }
         }
     </script>
 </body>
