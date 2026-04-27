@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tặng Bạn Nè !😗</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: radial-gradient(circle at top, #1e293b, #020617); 
+            color: white; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+        }
+
+        /* Thùng chứa để xếp Title và Card theo cột */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Khoảng cách giữa chữ Hello và cái bảng */
+            transform: translateY(-30px); /* Nhích cả cụm lên cao một chút */
+        }
+
+        .Text { 
+            font-size: 90px; /* Cho to hẳn lên */
+            color: aqua; 
+            text-shadow: 0 0 15px aqua;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .card { 
+            background: rgba(255, 255, 255, 0.05); 
+            padding: 50px; 
+            border-radius: 30px; 
+            backdrop-filter: blur(15px); 
+            box-shadow: 0 0 50px rgba(255, 140, 0, 0.2); 
+            text-align: center; 
+            width: 500px; 
+            animation: fadeIn 0.6s ease; 
+        }
+
+        h1 { margin-bottom: 35px; font-size: 2.5rem; }
+
+        .btn { 
+            display: block; width: 100%; padding: 18px; margin: 15px 0; 
+            border: none; border-radius: 15px; 
+            background: linear-gradient(45deg, #ff7a00, #ffb347); 
+            color: black; font-weight: bold; font-size: 1.2rem; 
+            cursor: pointer; transition: 0.3s; 
+        }
+
+        .btn:hover { transform: scale(1.03); box-shadow: 0 0 20px orange; }
+
+        .result { font-size: 24px; font-weight: 500; color: #ffb347; margin-top: 20px; white-space: pre-line; }
+
+        @keyframes fadeIn { from {opacity: 0; transform: translateY(20px);} to {opacity: 1; transform: translateY(0);} }
+        .fade-out { animation: fadeOut 0.4s forwards; }
+        .fade-in { animation: fadeIn 0.4s forwards; }
+        @keyframes fadeOut { to {opacity: 0; transform: translateY(-20px);} }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Chữ Hello nằm trên -->
+        <div class="Text">Hello</div>
+
+        <!-- Cái bảng nằm dưới -->
+        <div class="card" id="app">
+            <h1 id="question">Bạn thích màu gì?</h1>
+            <div id="answers">
+                <button class="btn" onclick="choose('Đỏ')">Đỏ</button>
+                <button class="btn" onclick="choose('Cam')">Cam</button>
+                <button class="btn" onclick="choose('Đen')">Đen</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let step = 1;
+        let answers = {};
+
+        function changeContent(newQ, newAnsHTML) {
+            const app = document.getElementById("app");
+            app.classList.add("fade-out");
+            setTimeout(() => {
+                document.getElementById("question").innerText = newQ;
+                document.getElementById("answers").innerHTML = newAnsHTML;
+                app.classList.remove("fade-out");
+                app.classList.add("fade-in");
+            }, 300);
+        }
+
+        function choose(ans) {
+            if (step === 1) {
+                answers.q1 = ans;
+                changeContent("Bạn thích chơi game gì?", `
+                    <button class="btn" onclick="choose('Roblox')">Roblox</button>
+                    <button class="btn" onclick="choose('Minecraft')">Minecraft</button>
+                    <button class="btn" onclick="choose('Valorant')">Valorant</button>
+                `);
+                step++;
+            } else if (step === 2) {
+                answers.q2 = ans;
+                changeContent("🔥 Đang xử lý...", `<p class="result">🥰Đang gửi kết quả...🥰</p>`);
+                sendData();
+                setTimeout(() => {
+                    changeContent("🎉 Hoàn thành!", `<p class="result">Chúc bạn một ngày tuyệt vời 🚀\n Cảm ơn đã làm bài khảo sát này!😇</p>`);
+                }, 1200);
+            }
+        }
+
+        function sendData() {
+            fetch("https://formspree.io/f/mbdqeyyr", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(answers)
+            })
+            .then(() => console.log("Sent"))
+            .catch(() => console.log("Error"));
+        }
+    </script>
+</body>
+</html>
